@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katalog Tes - BrainUp.Id</title>
+<!-- FONT BARU: Montserrat (Judul), Plus Jakarta Sans (Subjudul), Inter (Deskripsi) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root{
+    --core:#0b3c2a; 
+    --core-dark:#072a1d; 
+    --accent:#F4A259; 
+    --bg-main:#F8FAF9;
+  }
+  
+  body { font-family: 'Inter', sans-serif; background: var(--bg-main); color: #1C2B2B; line-height: 1.6; padding-bottom: 80px; }
+  
+  /* HEADER */
+  .header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,.03); position: sticky; top: 0; z-index: 100; }
+  .brand { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 22px; color: var(--core); display: flex; align-items: center; gap: 12px; text-decoration: none; letter-spacing: -0.5px; }
+  .brand img { height: 40px; border-radius: 8px; }
+  .btn-back { color: #5A6B6B; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; text-decoration: none; font-size: 14px; transition: 0.3s; letter-spacing: 0.5px; text-transform: uppercase; }
+  .btn-back:hover { color: var(--accent); }
+
+  /* CONTAINER & TITLE */
+  .container { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
+  .page-title { text-align: center; margin-bottom: 60px; }
+  
+  /* JUDUL UTAMA PAKAI MONTSERRAT (SANGAT BOLD) */
+  .page-title h1 { font-family: 'Montserrat', sans-serif; font-size: 3.5rem; color: var(--core); margin-bottom: 15px; font-weight: 900; letter-spacing: -1.5px; text-transform: uppercase; }
+  .page-title p { color: #5A6B6B; font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 500; letter-spacing: 0.5px; }
+
+  /* GRID SEMUA TES */
+  .grid-tes { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+  
+  /* KARTU TES FULL BACKGROUND */
+  .card { 
+    border-radius: 24px; 
+    overflow: hidden; 
+    position: relative; 
+    height: 320px; /* Sedikit lebih tinggi biar lega */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    padding: 30px;
+    text-decoration: none;
+    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  
+  .card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(11,60,42,.25); }
+
+  /* Overlay Gelap */
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(7,42,29,0.98) 0%, rgba(7,42,29,0.5) 60%, transparent 100%);
+    z-index: 1;
+    transition: 0.4s;
+  }
+  .card:hover .card-overlay { background: linear-gradient(to top, rgba(7,42,29,1) 0%, rgba(7,42,29,0.6) 60%, transparent 100%); }
+
+  /* Konten di atas overlay */
+  .card-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  /* JUDUL KARTU PAKAI PLUS JAKARTA SANS */
+  .card-content h3 { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    color: #fff; 
+    font-size: 1.6rem; 
+    margin-bottom: 10px; 
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  
+  /* DESKRIPSI PAKAI INTER */
+  .card-content p {
+    color: #E6EFEA;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    font-weight: 400;
+  }
+
+  /* BUTTONS */
+  .btn { 
+    display: inline-block;
+    padding: 12px 28px; 
+    border-radius: 50px; 
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800; 
+    font-size: 13px; 
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: 0.3s; 
+    text-align: center;
+    width: max-content;
+  }
+  .btn-mulai { background: #fff; color: var(--core); }
+  .card:hover .btn-mulai { background: var(--accent); color: var(--core-dark); transform: scale(1.05); }
+  
+  .btn-wa { background: var(--accent); color: var(--core-dark); }
+  .card:hover .btn-wa { background: #fff; color: var(--core); transform: scale(1.05); }
+
+  /* FLOATING WHATSAPP */
+  .float-wa { position: fixed; bottom: 40px; right: 40px; background: #22C55E; color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(34,197,94,0.4); z-index: 999; transition: 0.3s; text-decoration: none; }
+  .float-wa:hover { transform: scale(1.1) rotate(10deg); background: #16A34A; }
+
+  @media (max-width: 768px) {
+    .header { padding: 15px 20px; }
+    .page-title h1 { font-size: 2.5rem; }
+    .grid-tes { grid-template-columns: 1fr; }
+    .card { height: 280px; padding: 25px; }
+    .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <a href="https://web-bimbel-lu.vercel.app" class="brand">
+      <img src="https://i.imgur.com/fyKfXaZ.png" alt="Logo">
+      BRAINUP.ID
+    </a>
+    <a href="https://web-bimbel-lu.vercel.app" class="btn-back">← Kembali</a>
+  </div>
+
+  <!-- KONTEN -->
+  <div class="container">
+    <div class="page-title">
+      <h1>Katalog Tes</h1>
+      <p>Persiapkan dirimu menembus sekolah kedinasan impian.</p>
+    </div>
+
+    <div class="grid-tes">
+      
+      <!-- 1. TRYOUT SKD UTAMA -->
+      <a href="https://wa.me/6281234567890" target="_blank" class="card" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop'); background-size: cover; background-position: center;">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>TryOut SKD Utama</h3>
+          <p>Simulasi CAT BKN asli (TWK, TIU, TKP) dengan penilaian otomatis.</p>
+          <span class="btn btn-wa">Beli Kode Akses</span>
+        </div>
+      </a>
+
+      <!-- 2. DERET ANGKA -->
+      <a href="https://deret-angka.vercel.app/" target="_blank" class="card" style="background-image: url('https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=800&auto=format&fit=crop'); background-size: cover; background-position: center;">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Deret Angka</h3>
+          <p>Latih logika dan kecepatanmu dalam memecahkan pola angka.</p>
+          <span class="btn btn-mulai">Mulai Tes</span>
+        </div>
+      </a>
+
+      <!-- 3. SINONIM ANTONIM -->
+      <a href="https://sinonimantonim.vercel.app/" target="_blank" class="card" style="background-image: url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=800&auto=format&fit=crop'); background-size: cover; background-position: center;">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Sinonim & Antonim</h3>
+          <p>Uji kemampuan verbal dan perbendaharaan kata bahasa Indonesia.</p>
+          <span class="btn btn-mulai">Mulai Tes</span>
+        </div>
+      </a>
+
+      <!-- 4. PENGETAHUAN UMUM -->
+      <a href="https://pengetahuan-umum.vercel.app/" target="_blank" class="card" style="background-image: url('https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?q=80&w=800&auto=format&fit=crop'); background-size: cover; background-position: center;">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Pengetahuan Umum</h3>
+          <p>Tes wawasan kebangsaan, sejarah, dan isu terkini.</p>
+          <span class="btn btn-mulai">Mulai Tes</span>
+        </div>
+      </a>
+
+      <!-- 5. KECERMATAN ANGKA -->
+      <a href="https://kecermatan-angka.vercel.app/" target="_blank" class="card" style="background-image: url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=800&auto=format&fit=crop'); background-size: cover; background-position: center;">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Kecermatan Angka</h3>
+          <p>Uji ketelitianmu dalam membedakan angka dan hitungan cepat.</p>
+          <span class="btn btn-mulai">Mulai Tes</span>
+        </div>
+      </a>
+
+      <!-- 6. KECERMATAN SIMBOL -->
+      <a href="https://kecermatan-simbol.vercel.app/" target="_blank" class="card" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop'); background-size: cover; background-position: center;">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Kecermatan Simbol</h3>
+          <p>Tes fokus dan kecepatan mencocokkan simbol di bawah tekanan.</p>
+          <span class="btn btn-mulai">Mulai Tes</span>
+        </div>
+      </a>
+
+      <!-- 7. TES KREPLIN / NLSI -->
+      <a href="https://teskreplin-nlsi.vercel.app/" target="_blank" class="card" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop'); background-size: cover; background-position: center;">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Tes Kreplin / NLSI</h3>
+          <p>Uji konsistensi dan ketahanan kerjamu dalam hitungan panjang.</p>
+          <span class="btn btn-mulai">Mulai Tes</span>
+        </div>
+      </a>
+
+      <!-- 8. GANJIL GENAP -->
+      <a href="https://ganjil-genapp.vercel.app/" target="_blank" class="card" style="background-image: url('https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=800&auto=format&fit=crop'); background-size: cover; background-position: center;">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Ganjil Genap</h3>
+          <p>Latih kecepatan pengambilan keputusan angka ganjil dan genap.</p>
+          <span class="btn btn-mulai">Mulai Tes</span>
+        </div>
+      </a>
+
+      <!-- 9. JASMANI -->
+      <a href="https://jasmani-brainup.vercel.app/" target="_blank" class="card" style="background-image: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=800&auto=format&fit=crop'); background-size: cover; background-position: center;">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Tes Jasmani</h3>
+          <p>Simulasi tes kebugaran fisik untuk persiapan masuk sekolah kedinasan.</p>
+          <span class="btn btn-mulai">Mulai Tes</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/6281234567890?text=Halo%20Admin%20BrainUp" target="_blank" class="float-wa" title="Hubungi Admin">
+    <svg width="35" height="35" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 2C6.51 2 2.014 6.496 2.014 12.017c0 1.766.461 3.49 1.336 5.012L2 22l5.108-1.338A9.968 9.968 0 0012.03 22c5.521 0 10.017-4.496 10.017-10.017S17.552 2 12.031 2zm5.223 14.03c-.222.625-1.286 1.196-1.762 1.242-.476.047-1.065.21-3.488-1.007-2.914-1.466-4.763-4.478-4.908-4.68-.144-.203-1.166-1.554-1.166-2.966 0-1.412.735-2.104 1.003-2.392.268-.288.587-.36.783-.36.196 0 .392.004.563.013.183.01.43-.07.67.515.245.595.833 2.053.908 2.203.075.15.125.325.025.525-.1.2-.375.604-.6.83-.225.225-.35.375-.225.6.125.225.556.917 1.192 1.486.816.728 1.504.955 1.717 1.062.212.107.338.088.463-.054.125-.142.535-.625.678-.838.143-.213.286-.178.48-.104.195.074 1.238.584 1.45.69.212.107.35.16.4.25.05.09.05.522-.172 1.147z"/></svg>
+  </a>
+
+</body>
+</html>
